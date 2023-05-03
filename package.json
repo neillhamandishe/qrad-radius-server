@@ -1,0 +1,15 @@
+{
+  "name": "qrad-radius-server",
+  "version": "1.0.0",
+  "description": "A custom-built RADIUS server with LDAP authentication and push notificaiton based MFA",
+  "main": "server.js",
+  "repository": "git@github.com:neillhamandishe/qrad-radius-server.git",
+  "author": "Neill Hamandishe <nhamandishenh@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "ldapjs": "^3.0.2",
+    "radius-server": "^2.1.4"
+  }
+}
