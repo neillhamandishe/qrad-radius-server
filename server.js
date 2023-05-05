@@ -13,7 +13,7 @@ catch{
 	exit(1)
 }
 
-// const ldapClient = initLdapClient(process.env.LDAP_URL);
+const ldapClient = initLdapClient(process.env.LDAP_URL);
 
 const authenticateRadius = (req, res)=>{
 	const username = req.get("User-Name");
