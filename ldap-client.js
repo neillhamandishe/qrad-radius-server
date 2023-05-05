@@ -17,7 +17,7 @@ const initLdapClient = (ldapUrl = null) => {
 	
 	client.on("connectError", (err)=>{
 	
-		console.log("[LDAP-CON-001] connection error");
+		console.error("[LDAP-CON-001] connection error");
 	
 	});
 	
@@ -49,11 +49,10 @@ const initLdapClient = (ldapUrl = null) => {
 }
 
 const bindLDAP = (username, password, client)=>{
-	const dn = `ad\\${username}`;
-	console.info("[INFO] Attempting bind...");
-	const res = client.bind(dn, password, (err) => {
+	const dn = `ad\\${username.value}`;
+	console.info("[LDAP-INFO] Attempting bind...");
+	const res = client.bind(dn, password.value.toString(), (err) => {
 		if(err){
-
 			console.error("[LDAP-AUTH-001] Failed to bind");
 			console.error(`[ERROR] 	${err}`);
 			client.unbind();
