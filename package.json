@@ -8,8 +8,12 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "scripts": {
+    "test": "node test-client.js"
+  },
   "dependencies": {
-    "ldapjs": "^3.0.2",
-    "radius-server": "^2.1.4"
+    "dotenv": "^16.0.3",
+    "isc-radius": "^0.2.1",
+    "ldapjs": "^3.0.2"
   }
 }
