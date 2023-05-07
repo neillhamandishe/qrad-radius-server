@@ -1,7 +1,7 @@
 import {exit} from "node:process";
 import * as dotenv from "dotenv";
 import radius from 'isc-radius';
-import {initLdapClient,bindLDAP, bindLDAPAsync} from "./ldap-client.js";
+import {bindLDAP} from "./ldap-client.js";
 
 const {Server: RadiusServer} = radius;
 
@@ -13,7 +13,7 @@ catch{
 	exit(1)
 }
 
-const ldapClient = initLdapClient(process.env.LDAP_URL);
+// const ldapClient = initLdapClient(process.env.LDAP_URL);
 
 const authenticateRadius = async (req, res)=>{
 	const username = req.get("User-Name");
