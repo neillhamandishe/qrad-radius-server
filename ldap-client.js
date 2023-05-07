@@ -1,10 +1,11 @@
 import  ldap from "ldapjs";
-import {promisify} from "node:util";
+// import {promisify} from "node:util";
+import * as Promise from "bluebird";
 
-const {createClient} = ldap;
+Promise.promisifyAll(ldap);
 
 const initLdapClient = (ldapUrl = null) => {
-	const client = createClient({
+	const client = ldap.createClientAsync({
 		//url: ['ldap://192.168.20.10:389'],
 		url: ldapUrl ?? process.env.LDAP_URL
 	});
@@ -71,17 +72,26 @@ const bindLDAPAsync = async (username, password, client)=>{
 const bindLDAP = (username, password, client)=>{
 	const dn = `ad\\${username.value}`;
 	console.info("[LDAP-INFO] Attempting bind...");
-	const res = client.bind(dn, password.value.toString(), (err) => {
-		if(err){
-			console.error("[LDAP-AUTH-001] Failed to bind");
-			console.error(`[ERROR] 	${err}`);
-			client.unbind();
-			return false;
-		}
+	// const res = client.bind(dn, password.value.toString(), (err) => {
+	// 	if(err){
+	// 		console.error("[LDAP-AUTH-001] Failed to bind");
+	// 		console.error(`[ERROR] 	${err}`);
+	// 		client.unbind();
+	// 		return false;
+	// 	}
+	// 	console.info("[INFO] Bind success");
+	// 	return true;
+	// });
+	// return res;
+	const res = client.bindAsync(username, password).then(_=>{
 		console.info("[INFO] Bind success");
 		return true;
-	});
-	return res;
+	}).catch(err=>{
+			console.error("[LDAP-AUTH-001] Failed to bind");
+			console.error(`[ERROR] 	${err}`);
+			return false;
+		});
+		return res;	
 }
 
 const bindLdapAsync = promisify(bindLDAP);

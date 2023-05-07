@@ -12,6 +12,7 @@
     "test": "node test-client.js"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "dotenv": "^16.0.3",
     "isc-radius": "^0.2.1",
     "ldapjs": "^3.0.2"
