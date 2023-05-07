@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@google-cloud/promisify@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@google-cloud/promisify/-/promisify-3.0.1.tgz#8d724fb280f47d1ff99953aee0c1669b25238c2e"
-  integrity sha512-z1CjRjtQyBOYL+5Qr9DdYIfrdLBe746jRTYfaYU6MeXkqp7UfYs/jX16lFFVzZ7PGEJvqZNqYUEtb1mvDww4pA==
-
 "@ldapjs/asn1@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ldapjs/asn1/-/asn1-2.0.0.tgz#e25fa38fcf0b4310275d6a5a05fe4603efef5eb4"
@@ -78,6 +73,18 @@
   resolved "https://registry.yarnpkg.com/@ldapjs/protocol/-/protocol-1.2.1.tgz#d58d371d6958f28095e8de23b35341bcaba55cf3"
   integrity sha512-O89xFDLW2gBoZWNXuXpBSM32/KealKCTb3JGtJdtUQc7RjAk8XzrRgyz02cPAwGKwKPxy0ivuC7UP9bmN87egQ==
 
+"@types/ldapjs@^2.2.0":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@types/ldapjs/-/ldapjs-2.2.5.tgz#b6623bc5ad4fab85ef3cfa586db691d016a3598c"
+  integrity sha512-Lv/nD6QDCmcT+V1vaTRnEKE8UgOilVv5pHcQuzkU1LcRe4mbHHuUo/KHi0LKrpdHhQY8FJzryF38fcVdeUIrzg==
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*":
+  version "20.1.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.1.0.tgz#258805edc37c327cf706e64c6957f241ca4c4c20"
+  integrity sha512-O+z53uwx64xY7D6roOi4+jApDGFg0qn6WHcxe5QeqjMaTezBO/mxdfFXIVAVVyNWKx84OmPB3L8kbVYOTeN34A==
+
 abstract-logging@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/abstract-logging/-/abstract-logging-2.0.1.tgz#6b0c371df212db7129b57d2e7fcf282b8bf1c839"
@@ -94,11 +101,6 @@ backoff@^2.5.0:
   integrity sha512-wC5ihrnUXmR2douXmXLCe5O3zg3GKIyvRi/hi58a/XyRxVI+3/yM0PYueQOZXPXQ9pxBislYkw+sF9b7C/RuMA==
   dependencies:
     precond "0.2"
-
-bluebird@^3.7.2:
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
-  integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -120,7 +122,16 @@ isc-radius@^0.2.1:
   resolved "https://registry.yarnpkg.com/isc-radius/-/isc-radius-0.2.1.tgz#9c902b04f6ca176b3e3bae4cebc2aa7a0cf05dea"
   integrity sha512-+6fR//sMnQ4ZoBVryIlKcIiNd8pLK/D2678rb005uGMrTuHl/ZdtjaDjBi0yrewTS6+bBDOUzV885xUMBiuyjg==
 
-ldapjs@^3.0.2:
+ldapjs-promise@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ldapjs-promise/-/ldapjs-promise-3.0.1.tgz#e5e51f79932d9b190432f15f296882ab2c72ed92"
+  integrity sha512-o6xyPmjjQ/+g0VaPVW/+Ks16r3FpRwHgl2G/3j51iUqYOaEZ4gsMNxEf3I8f4oiYHFMwtl3Aj9jdBU3bdE6c9A==
+  dependencies:
+    "@types/ldapjs" "^2.2.0"
+    abstract-logging "^2.0.1"
+    ldapjs "^3.0.1"
+
+ldapjs@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/ldapjs/-/ldapjs-3.0.2.tgz#1f21fd4ae6e77b78ef3b56d0643a656553761f13"
   integrity sha512-EBxQaBmgXk1DEaYYJWkp5i5PtSLRI2CWtm1gzxG5buOt40Q7j3zY6MbpRDkach/Cnxr3qSyLHiyXvvkLCOXw+Q==

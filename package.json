@@ -12,10 +12,8 @@
     "test": "node test-client.js"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^3.0.1",
-    "bluebird": "^3.7.2",
     "dotenv": "^16.0.3",
     "isc-radius": "^0.2.1",
-    "ldapjs": "^3.0.2"
+    "ldapjs-promise": "^3.0.1"
   }
 }

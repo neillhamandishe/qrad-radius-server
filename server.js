@@ -1,7 +1,7 @@
 import {exit} from "node:process";
 import * as dotenv from "dotenv";
 import radius from 'isc-radius';
-import {bindLDAP} from "./ldap-client.js";
+import {initLdapClient} from "./ldap-client.js";
 
 const {Server: RadiusServer} = radius;
 
@@ -13,21 +13,24 @@ catch{
 	exit(1)
 }
 
-// const ldapClient = initLdapClient(process.env.LDAP_URL);
+const ldapClient = initLdapClient(process.env.LDAP_URL);
 
 const authenticateRadius = async (req, res)=>{
 	const username = req.get("User-Name");
 	const password = req.get("User-Password");
-	// await bindLDAPAsync(username, password, ldapClient).then(_=>{
-	// 	console.info("[INFO] Bind successful");
-	// 	res.code = "Access-Accept";
-	// }).catch(err=>{
-	// 	console.error("[ERROR] Bind failed");
-	// 	console.error(err);
-	// 	res.code = "Access-Reject";
-	// });
-	const authenticated = bindLDAP(username, password);
-	authenticated ? res.code = "Access-Accept": res.code = "Access-Reject";
+	
+	const dn = `ad\\${username.value}`;
+	
+	ldapClient.bind(dn, password.value.toString())
+		.then(()=>{
+			res.code = "Access-Accept";
+			console.info("[INFO] Ldap Bind success");
+		})
+		.catch(err=>{
+			res.code = "Access-Reject";
+			console.error("[ERROR-LDAP] Bind failed");
+			console.error(err);
+		});
 };
 
 new RadiusServer()
