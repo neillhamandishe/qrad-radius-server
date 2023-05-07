@@ -1,5 +1,5 @@
 import  ldap from "ldapjs";
-
+import {promisify} from "node:util";
 
 const {createClient} = ldap;
 
@@ -48,6 +48,26 @@ const initLdapClient = (ldapUrl = null) => {
 	return client;
 }
 
+const bindLDAPAsync = async (username, password, client)=>{
+	const dn = `ad\\${username.value}`;
+	const bindAsync = promisify(client.bind);
+	console.info("[LDAP-INFO] Attempting bind...");
+	
+	return await bindAsync(dn, password.value.toString());
+	
+	const res = client.bind(dn, password.value.toString(), (err) => {
+		if(err){
+			console.error("[LDAP-AUTH-001] Failed to bind");
+			console.error(`[ERROR] 	${err}`);
+			client.unbind();
+			return false;
+		}
+		console.info("[INFO] Bind success");
+		return true;
+	});
+	return res;
+};
+
 const bindLDAP = (username, password, client)=>{
 	const dn = `ad\\${username.value}`;
 	console.info("[LDAP-INFO] Attempting bind...");
@@ -64,7 +84,10 @@ const bindLDAP = (username, password, client)=>{
 	return res;
 }
 
+const bindLdapAsync = promisify(bindLDAP);
+
 export {
 	initLdapClient,
-	bindLDAP
+	bindLDAP,
+	bindLDAPAsync
 }
