@@ -19,7 +19,8 @@ const authenticateRadius = async (req, res)=>{
 	const username = req.get("User-Name");
 	const password = req.get("User-Password");
 	
-	const dn = `ad\\${username.value}`;
+	const dn = `${username.value}`;
+	let authenticated = null;
 	
 	ldapClient.bind(dn, password.value.toString())
 		.then(()=>{
@@ -31,6 +32,13 @@ const authenticateRadius = async (req, res)=>{
 			console.error("[ERROR-LDAP] Bind failed");
 			console.error(err);
 		});
+	
+	setTimeout(()=>{
+		if (authenticated == null){
+			console.error("[ERROR] Auth Timeout");
+			res.code = "Access-Reject";
+		}
+	}, 10000);
 };
 
 new RadiusServer()
@@ -40,6 +48,5 @@ new RadiusServer()
 	auth: authenticateRadius
 })
 .start();
-
 
 

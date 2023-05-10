@@ -6,6 +6,7 @@ const initLdapClient = (ldapUrl = null)=>{
 	const client = createClient({
 		url: ldapUrl ?? process.env.LDAP_URL	
 	});
+	
 	client.on("connect", ()=>{
 		console.info("[INFO] Connection established.");
 	});
